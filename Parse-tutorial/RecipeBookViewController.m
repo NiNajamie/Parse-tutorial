@@ -186,9 +186,11 @@
 - (PFQuery *)queryForTable {
     PFQuery *query = [PFQuery queryWithClassName:self.parseClassName];
     
+    if ([self.objects count] == 0) {
+
     // loads data from cache first, then from the network
     query.cachePolicy = kPFCachePolicyCacheThenNetwork;
-    
+    }
     return query;
 }
 

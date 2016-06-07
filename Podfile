@@ -4,4 +4,5 @@
 target 'Parse-tutorial' do
 pod 'Parse'
 pod 'ParseUI'
+pod 'MBProgressHUD', '~> 0.9.2'
 end

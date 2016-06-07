@@ -38,6 +38,8 @@
 		965546A11D06043A00A9F0F5 /* photo-frame@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 965546A01D06043A00A9F0F5 /* photo-frame@2x.png */; };
 		965546A31D06052300A9F0F5 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 965546A21D06052300A9F0F5 /* MainStoryboard.storyboard */; };
 		965546A51D06078900A9F0F5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 965546A41D06078900A9F0F5 /* InfoPlist.strings */; };
+		965546A81D06466000A9F0F5 /* AddRecipeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 965546A71D06466000A9F0F5 /* AddRecipeViewController.m */; };
+		965546AA1D06659F00A9F0F5 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 965546A91D06659F00A9F0F5 /* MobileCoreServices.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -80,6 +82,9 @@
 		965546A01D06043A00A9F0F5 /* photo-frame@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "photo-frame@2x.png"; path = "../../../Desktop/RecipeBookParseEmpty/RecipeBook/photo-frame@2x.png"; sourceTree = "<group>"; };
 		965546A21D06052300A9F0F5 /* MainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard.storyboard; sourceTree = "<group>"; };
 		965546A41D06078900A9F0F5 /* InfoPlist.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = InfoPlist.strings; sourceTree = "<group>"; };
+		965546A61D06466000A9F0F5 /* AddRecipeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddRecipeViewController.h; sourceTree = "<group>"; };
+		965546A71D06466000A9F0F5 /* AddRecipeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddRecipeViewController.m; sourceTree = "<group>"; };
+		965546A91D06659F00A9F0F5 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		D8C386F74E4555BBBD496570 /* libPods-Parse-tutorial.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Parse-tutorial.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -88,6 +93,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				965546AA1D06659F00A9F0F5 /* MobileCoreServices.framework in Frameworks */,
 				8D1712E10D0D27B484DD828A /* libPods-Parse-tutorial.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -107,6 +113,7 @@
 		3DB293DBC5639985087095CD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				965546A91D06659F00A9F0F5 /* MobileCoreServices.framework */,
 				D8C386F74E4555BBBD496570 /* libPods-Parse-tutorial.a */,
 			);
 			name = Frameworks;
@@ -135,6 +142,8 @@
 			children = (
 				965546731D06008800A9F0F5 /* RecipeBookAppDelegate.h */,
 				965546741D06008800A9F0F5 /* RecipeBookAppDelegate.m */,
+				965546A61D06466000A9F0F5 /* AddRecipeViewController.h */,
+				965546A71D06466000A9F0F5 /* AddRecipeViewController.m */,
 				965546701D05FFE600A9F0F5 /* RecipeBookViewController.h */,
 				965546711D05FFE600A9F0F5 /* RecipeBookViewController.m */,
 				9655466D1D05FF7B00A9F0F5 /* RecipeDetailViewController.h */,
@@ -336,6 +345,7 @@
 				9655465E1D05FD4300A9F0F5 /* Parse_tutorial.xcdatamodeld in Sources */,
 				965546751D06008800A9F0F5 /* RecipeBookAppDelegate.m in Sources */,
 				965546721D05FFE600A9F0F5 /* RecipeBookViewController.m in Sources */,
+				965546A81D06466000A9F0F5 /* AddRecipeViewController.m in Sources */,
 				965546521D05FD4300A9F0F5 /* main.m in Sources */,
 				9655466F1D05FF7B00A9F0F5 /* RecipeDetailViewController.m in Sources */,
 			);

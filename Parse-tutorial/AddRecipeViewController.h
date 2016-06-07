@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AddRecipeViewController : UIViewController <UITextFieldDelegate,UINavigationControllerDelegate, UIImagePickerControllerDelegate>
+@interface AddRecipeViewController : UIViewController <UITextFieldDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
 @end

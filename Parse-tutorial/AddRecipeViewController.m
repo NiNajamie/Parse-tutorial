@@ -16,7 +16,11 @@
 @interface AddRecipeViewController ()
 - (IBAction)save:(id)sender;
 - (IBAction)cancel:(id)sender;
+//@property (weak, nonatomic) IBOutlet PFImageView *recipeImageView;
+
 @property (weak, nonatomic) IBOutlet PFImageView *recipeImageView;
+
+
 @property (weak, nonatomic) IBOutlet UITextField *nameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *prepTimeTextField;
 @property (weak, nonatomic) IBOutlet UITextField *ingredientsTextField;
@@ -48,25 +52,9 @@
 }
 
 #pragma mark - Table view delegate
-//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Upload Complete" message:@"Successfully saved the recipe" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-//            [alert show];
-//            
-//            // Notify table view to reload the recipes from Parse cloud
-//            [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshTable" object:self];
-//            
-//            // Dismiss the controller
-//            [self dismissViewControllerAnimated:YES completion:nil];
-//            
-//        } else {
-//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Upload Failure" message:[error localizedDescription] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-//            [alert show];
-//            
-//        }
-//        
-//    }];
-//}
-
 - (IBAction)save:(id)sender {
+    
+    // saving value
     PFObject *recipe = [PFObject objectWithClassName:@"Recipe"];
     [recipe setObject:self.nameTextField.text forKey:@"name"];
     [recipe setObject:self.prepTimeTextField.text forKey:@"prepTime"];
@@ -78,26 +66,57 @@
     NSString *filename = [NSString stringWithFormat:@"%@.png", self.nameTextField.text];
     PFFile *imageFile = [PFFile fileWithName:filename data:imageData];
     [recipe setObject:imageFile forKey:@"imageFile"];
-    // show progress
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self animated:YES];
+    
+    // show progress (spinner)
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.mode = MBProgressHUDModeIndeterminate;
     hud.labelText = @"Uploading";
+    
+    // when user press 'save', show spinner
     [hud show:YES];
+    
     // upload recipe to Parse
     [recipe saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        
+        // when display data, spinner disapper
         [hud hide:YES];
         
         if (!error) {
             // show success msg
-            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Upload complete" message:@"Successfully saved the recipe" preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Upload complete"
+                                                                           message:@"Successfully saved the recipe"
+                                                                    preferredStyle:UIAlertControllerStyleAlert];
+            
             UIAlertAction* ok = [UIAlertAction actionWithTitle:@"OK"
                                                          style:UIAlertActionStyleDefault
                                                        handler:^(UIAlertAction * action) {
+            // notify table view to reload the recipes from Parse cloud
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshTable" object:self];
+            // dismiss viewController
             [alert dismissViewControllerAnimated:YES completion:nil];
             }];
             
+            // add + present(show)VC
+            [alert addAction:ok];
+            [alert presentationController];
+            
+        } else {
+            // show failure msg
+            UIAlertController *alertFailure = [UIAlertController alertControllerWithTitle:@"Upload Failure"
+                                                                                  message:[error localizedDescription]
+                                                                           preferredStyle:UIAlertControllerStyleAlert];
+            
+            UIAlertAction *ok = [UIAlertAction actionWithTitle:@"OK"
+                                                         style:UIAlertActionStyleDefault
+                                                       handler:^(UIAlertAction * action) {
+            // dismiss viewController (automatically)
+            [alertFailure dismissViewControllerAnimated:YES completion:nil];
+            }];
+            [alertFailure addAction:ok];
+            [alertFailure presentationController];
         }
     }];
+        
 }
 
 - (IBAction)cancel:(id)sender {
@@ -121,7 +140,8 @@
 }
 
 #pragma mark - PhotoLibary delegate
-- (void)showPhotoLibary {
+//- (void)showPhotoLibary {
+- (IBAction)addImageButton:(UIButton *)sender {
     
     if (([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeSavedPhotosAlbum] == NO)) {
         return;
@@ -138,23 +158,24 @@
     [self.navigationController presentViewController:mediaUI animated:YES completion:nil];
 }
 
-// when user taps "add"Button at the first time, we call photoLibrary
+// when user taps "add"Button at the first time, we call photoLibrary[method:(addImageButton)]
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     if (indexPath.row == 0) {
-        [self showPhotoLibary];
+        // [self showPhotoLibrary];
+        [self addImageButton:nil];
     }
 }
 
 #pragma mark - UIImagePickerController delegate
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
+    
     UIImage *originalImage = (UIImage*)[info objectForKey:UIImagePickerControllerOriginalImage];
     
     //selected image is then assigned to the image view of the new recipe.
     self.recipeImageView.image = originalImage;
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
-
-
 
 @end

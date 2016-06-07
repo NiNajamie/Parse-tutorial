@@ -151,7 +151,7 @@
     // Displays saved pictures from the Camera Roll album.
     mediaUI.mediaTypes = @[(NSString*) kUTTypeImage];
     // Hides the controls for moving & scaling pictures
-    mediaUI.allowsEditing = NO;
+    mediaUI.allowsEditing = YES;
     
     mediaUI.delegate = self;
     
@@ -171,10 +171,13 @@
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
     
-    UIImage *originalImage = (UIImage*)[info objectForKey:UIImagePickerControllerOriginalImage];
+//    UIImage *originalImage = (UIImage*)[info objectForKey:UIImagePickerControllerOriginalImage];
+    UIImage *editedImage = (UIImage*) [info objectForKey:UIImagePickerControllerEditedImage];
     
     //selected image is then assigned to the image view of the new recipe.
-    self.recipeImageView.image = originalImage;
+//    self.recipeImageView.image = originalImage;
+    
+    self.recipeImageView.image = editedImage;
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
 

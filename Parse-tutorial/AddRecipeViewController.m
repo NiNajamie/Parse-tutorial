@@ -61,7 +61,7 @@
     NSArray *ingredients = [self.ingredientsTextField.text componentsSeparatedByString:@","];
     [recipe setObject:ingredients forKey:@"ingredients"];
     
-    // Recipe image
+    // recipe image
     NSData *imageData = UIImageJPEGRepresentation(self.recipeImageView.image, 0.8);
     NSString *filename = [NSString stringWithFormat:@"%@.png", self.nameTextField.text];
     PFFile *imageFile = [PFFile fileWithName:filename data:imageData];
@@ -151,7 +151,7 @@
     // Displays saved pictures from the Camera Roll album.
     mediaUI.mediaTypes = @[(NSString*) kUTTypeImage];
     // Hides the controls for moving & scaling pictures
-    mediaUI.allowsEditing = YES;
+    mediaUI.allowsEditing = NO;
     
     mediaUI.delegate = self;
     
@@ -171,13 +171,13 @@
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
     
-//    UIImage *originalImage = (UIImage*)[info objectForKey:UIImagePickerControllerOriginalImage];
-    UIImage *editedImage = (UIImage*) [info objectForKey:UIImagePickerControllerEditedImage];
+    UIImage *originalImage = (UIImage*)[info objectForKey:UIImagePickerControllerOriginalImage];
+//    UIImage *editedImage = (UIImage*) [info objectForKey:UIImagePickerControllerEditedImage];
     
     //selected image is then assigned to the image view of the new recipe.
-//    self.recipeImageView.image = originalImage;
+    self.recipeImageView.image = originalImage;
     
-    self.recipeImageView.image = editedImage;
+//    self.recipeImageView.image = editedImage;
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
 
